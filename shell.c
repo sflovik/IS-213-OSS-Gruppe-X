@@ -1,6 +1,10 @@
 // Let's do this boys!
 int main (int argc, char **argv)
 {
+	//Locality-sensitive hashing
+	//laster inn config filer hvis noen finnes
+
+	//lsh looper tolk av kommandoer
 	lsh.loop();
 
 	return EXIT_SUCCESS;
@@ -11,6 +15,7 @@ void lsh_loop(void)
 	char **args;
 	int status;
 
+//leser, analyserer og utfører 
 	do {
 		printf("> ");
 		line = lsh_read_line();
