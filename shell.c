@@ -86,7 +86,7 @@ int gpx_launch(char **args)
   int status;
   
  //Forker prosessen, og lagrer return verdien. Når fork() returnerer , har vi to prosesser kjørende samdtidig. 
- // Child process
+ //Child process
  //child prosessen tar den første betingelsen (pid == 0)
     
   pid = fork(); //processid = fork
@@ -148,7 +148,7 @@ char *gpx_read_line(void)
   int position = 0;
   char *buffer = malloc(sizeof(char) * bufsize);
   int tegn;
-  // om !buffer (ingen buffer), gi allokeringserror og exit
+  // om !buffer (null buffer), betyr det at reallokeringen ikke fant sted. Printer feilbeskjed og kaller exit()
   if (!buffer) {
     fprintf(stderr, "gpx: allocation error\n");
     exit(EXIT_FAILURE);
@@ -182,7 +182,7 @@ char *gpx_read_line(void)
     if (position >= bufsize) {
       // Om position variabelen har en større verdi en vi satt som bufsize, må vi kjøre realloc
       bufsize += GPX_RL_BUFSIZE;
-      // Fremfor bufsize = GPX_RL_BUFSIZE, er bufsize +
+      // += betyr at bufsize = bufsize + GPX_RL_BUFSIZE. Dette øker bufsize for å reallokere
       buffer = realloc(buffer, bufsize);
       if (!buffer) {
         fprintf(stderr, "gpx: allocation error\n");
